@@ -2,10 +2,11 @@ import express, { Request, Response, Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
+import DbInitialize from './src/database/init';
+import userRoute from './src/routers/user-route';
 
 //create an app
 const app = express();
-
 
 app.use(
   cors({
@@ -16,7 +17,6 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
   try {
     if (err) {
@@ -25,9 +25,9 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
   } catch (e) {}
 });
 
+app.use('/user', userRoute);
 
-
-app.get('/', (req : Request, res : Response) => {
+app.get('/', (req: Request, res: Response) => {
   res.send(`Welcome to ${process.env.APPNAME}`);
 });
 
@@ -35,6 +35,7 @@ const PORT = process.env.PORT || 5000;
 
 const Boostrap = async function () {
   try {
+    await DbInitialize();
     app.listen(PORT, () => {
       console.log('Connection has been established successfully.');
     });
