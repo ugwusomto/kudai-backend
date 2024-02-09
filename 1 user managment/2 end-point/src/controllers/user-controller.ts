@@ -10,7 +10,7 @@ class UserController {
 
   async register(req: Request, res: Response) {
     try {
-      res.send({ message: 'registeration successful' });
+      res.send({ message: 'Registration successful' });
     } catch (error) {
       res.send({ message: 'Server Error' });
     }
@@ -18,7 +18,7 @@ class UserController {
 
   async login(req: Request, res: Response) {
     try {
-      res.send({ message: 'login successful' });
+      res.send({ message: 'Login successful' });
     } catch (error) {
       res.send({ message: 'Server Error' });
     }
@@ -26,7 +26,7 @@ class UserController {
 
   async forgotPassword(req: Request, res: Response) {
     try {
-      res.send({ message: 'forgot password successful' });
+      res.send({ message: 'Forgot password mail sent' });
     } catch (error) {
       res.send({ message: 'Server Error' });
     }
@@ -34,7 +34,7 @@ class UserController {
 
   async resetPassword(req: Request, res: Response) {
     try {
-      res.send({ message: 'reset password successful' });
+      res.send({ message: 'Reset password successful' });
     } catch (error) {
       res.send({ message: 'Server Error' });
     }
