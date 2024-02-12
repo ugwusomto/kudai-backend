@@ -14,6 +14,19 @@ export interface IUser {
   updatedAt: Date;
 }
 
+export interface IFindUserQuery {
+  where: {
+    [key: string]: string;
+  };
+  raw?: boolean;
+  returning: boolean;
+}
+
 export interface IUserCreationBody extends Optional<IUser, 'id' | 'createdAt' | 'updatedAt'> {}
 
 export interface IUserModel extends Model<IUser, IUserCreationBody>, IUser {}
+
+export interface IUserDataSource {
+  fetchOne(query: IFindUserQuery): Promise<IUser | null>;
+  create(record: IUserCreationBody): Promise<IUser>;
+}
