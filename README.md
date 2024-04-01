@@ -1,23 +1,40 @@
-# Kudai Bank API
+## Kudai Bank API
 
-Welcome to Kudai Bank API, a Node.js project for managing banking operations.
+Kudai Bank is a Node.js application that provides a comprehensive API for bank operations. It offers functionalities for both users and administrators, making it a versatile solution for financial management.
 
 ## Features
 
-- Authentication endpoints for users and admins.
-- Role management for admins.
-- Account management including creating accounts, depositing, transferring, withdrawing, managing payees, and loaning.
-- Transaction handling with integration into Paystack payment gateway API.
+* **Authentication:** Secure authentication endpoints for users and admins.
+* **Role Management:** Admins can manage user roles and permissions.
+* **Account Management:**
+    * Create new accounts.
+    * Deposit funds.
+    * Transfer funds between accounts.
+    * Withdraw funds.
+    * Manage payees for easy transfers.
+    * Loan application (implementation details not provided).
+* **Transactions:** Track and manage financial transactions.
+* **Payment Gateway Integration:** Integrates with Paystack for secure online payments.
 
-## Installation
+  ## Installation
 
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Install dependencies:
+1. Clone the repository:
+   
+    ```bash
+    git clone https://github.com/ugwusomto/kudai-backend.git
+    ```
+3. Navigate to the project directory:
+   
+    ```bash
+    cd kudai-bank
+    ```
+4. Install dependencies:
+   
     ```bash
     npm install
     ```
-4. Start the server:
+5. Start the server:
+   
     ```bash
     npm run dev
     ```
