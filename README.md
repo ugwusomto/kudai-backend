@@ -1,39 +1,47 @@
-## Kudai Bank API
+# Kudai Bank API
 
-**Table of Contents**
-
-* [Project Overview](#project-overview)
-* [Features](#features)
-* [Installation](#installation)
-* [Prerequisites](#prerequisites)
-* [Environment Variables](#environment-variables)
-    * [Security Considerations](#security-considerations)
-* [Running the Application](#running-the-application)
-* [Dockerization (Future Plans)](#dockerization-future-plans)
-* [Contributing](#contributing)
-* [License](#license)
-
-## Project Overview
-
-Kudai Bank is a Node.js application that provides a comprehensive API for bank operations. It offers functionalities for both users and administrators, making it a versatile solution for financial management.
+Welcome to Kudai Bank API, a Node.js project for managing banking operations.
 
 ## Features
 
-* **Authentication:** Secure authentication endpoints for users and admins.
-* **Role Management:** Admins can manage user roles and permissions.
-* **Account Management:**
-    * Create new accounts.
-    * Deposit funds.
-    * Transfer funds between accounts.
-    * Withdraw funds.
-    * Manage payees for easy transfers.
-    * Loan application (implementation details not provided).
-* **Transactions:** Track and manage financial transactions.
-* **Payment Gateway Integration:** Integrates with Paystack for secure online payments.
+- Authentication endpoints for users and admins.
+- Role management for admins.
+- Account management including creating accounts, depositing, transferring, withdrawing, managing payees, and loaning.
+- Transaction handling with integration into Paystack payment gateway API.
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the server:
+    ```bash
+    npm run dev
+    ```
 
-   ```bash
-   git clone https://your-github-repository-url.git
+## Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- MySQL database or XAMPP/MAMP/LAMP
+
+## .env Configuration
+
+Modify the `.env` file with your database and other configurations:
+
+```plaintext
+APPNAME="KUDAI BANK"
+DB_USERNAME=root
+DB_PASSWORD=''
+DB_NAME=kudai_bank
+DB_HOST=127.0.0.1
+DB_DIALECT=mysql
+DB_PORT=3306
+DB_ALTER=false
+JWT_KEY='sdfssffsdffsf'
+MAIL_USER=' '
+MAIL_PASSWORD=' '
