@@ -15,6 +15,18 @@ const logger = createLogger({
   ]
 })
 
+const  escapeHtml = (html:string) => {
+  return html.replace(/[&<>"']/g, '');
+}
+
+
+
+const isEmpty = (data: any) =>{
+  return !data || data.length === 0 || typeof data == 'undefined' || data == null || Object.keys(data).length == 0;
+};
+
+
+
 const handleError = (res: Response, message: string, statusCode: number = 400) => {
   logger.log({level : 'error' , message});
   return res.status(statusCode).json({ status: false, message });
@@ -33,12 +45,30 @@ const generateCode = (num: number = 15) => {
 };
 
 
+const parseToObject = (value: string): any => {
+  let counter = 0;
+  let data = JSON.parse(value);
+  while(counter <= 2){
+    if(typeof data == 'object'){
+      break;
+    }else{
+      data = JSON.parse(data);
+      counter++;
+    }
+  }
+  return data;
+
+}
+
 
 const Utility = {
   printRed,
   handleError,
   handleSuccess,
-  generateCode
+  generateCode,
+  isEmpty,
+  escapeHtml,
+  parseToObject
 };
 
 export default Utility;

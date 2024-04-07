@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn index.ts"
+    "dev": "ts-node-dev --respawn index.ts",
+    "start-mysql-server": "sudo /usr/local/mysql-8.3.0-macos14-arm64/bin/mysqld --user=root"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^8.1.0",
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "chalk": "^5.3.0",
     "cors": "^2.8.5",

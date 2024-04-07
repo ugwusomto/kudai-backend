@@ -7,11 +7,13 @@ import UserDataSource from '../datasources/user-datasource';
 import TokenService from '../services/token-service';
 import TokenDataSource from '../datasources/token-datasource';
 
+const router = express.Router();
+const tokenService = new TokenService(new TokenDataSource());
+export const userService = new UserService(new UserDataSource());
+const userController = new UserController(userService , tokenService);
+
 const createUserRoute = () => {
-  const router = express.Router();
-  const tokenService = new TokenService(new TokenDataSource());
-  const userService = new UserService(new UserDataSource());
-  const userController = new UserController(userService , tokenService);
+
 
   router.post('/register', validator(ValidationSchema.registerSchema), (req: Request, res: Response) => {
     return userController.register(req, res);
