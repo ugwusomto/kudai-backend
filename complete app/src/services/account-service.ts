@@ -1,5 +1,7 @@
+import { where } from "sequelize";
 import { IFindAccountQuery, IAccount, IAccountCreationBody, IAccountDataSource } from "../interfaces/account-interface";
 import { AccountStatus } from "../interfaces/enum/account-enum";
+import sequelize from "../database";
 
 class AccountService {
   private accountDataSource: IAccountDataSource;
@@ -54,6 +56,16 @@ class AccountService {
     } as IFindAccountQuery;
     return this.accountDataSource.fetchOne(query);
   }
+
+
+  async topUpBalance(accountId:string , amount : number , options : Partial<IFindAccountQuery> = {}) {
+    const filter = {where : {id:accountId },...options};
+    const update = {
+      balance : sequelize.literal(`balance+${amount}`)
+    }
+    return await this.accountDataSource.updateOne(filter , update as any );
+  }
+
 }
 
 export default AccountService;
