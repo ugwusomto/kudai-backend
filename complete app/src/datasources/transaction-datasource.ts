@@ -3,8 +3,10 @@ import { IFindTransactionQuery, ITransaction, ITransactionCreationBody, ITransac
 import TransactionModel from '../models/transaction-model';
 
 class TransactionDataSource implements ITransactionDataSource {
-  async create(record: ITransactionCreationBody): Promise<ITransaction> {
-    return await TransactionModel.create(record,{returning:true});
+  
+  
+  async create(record: ITransactionCreationBody , options?: Partial<IFindTransactionQuery>): Promise<ITransaction>{
+    return await TransactionModel.create(record,{returning:true , ...options});
   }
 
   async fetchOne(query: IFindTransactionQuery): Promise<ITransaction | null> {

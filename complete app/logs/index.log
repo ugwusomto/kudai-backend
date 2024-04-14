@@ -1,3 +1,9 @@
 2024-02-25 23:35:32 error : Invalid login detail 
 2024-02-25 23:35:52 error : Invalid login detail 
 2024-04-07 15:09:47 error : Authorization failed 
+2024-04-14 16:58:21 error : WHERE parameter "accountNumber" has invalid "undefined" value 
+2024-04-14 16:58:23 error : WHERE parameter "accountNumber" has invalid "undefined" value 
+2024-04-14 16:59:40 error : WHERE parameter "accountNumber" has invalid "undefined" value 
+2024-04-14 17:01:46 error : Insufficient balance to complete this transfer 
+2024-04-14 17:02:53 error : Invalid receiver account 
+2024-04-14 17:05:09 error : Amount must be above zero 
