@@ -6,12 +6,15 @@ import TransactionService from '../services/transaction-service';
 import TransactionDataSource from '../datasources/transaction-datasource';
 import AccountDataSource from '../datasources/account-datasource';
 import AccountService from '../services/account-service';
+import PayeeService from '../services/payee-service';
+import PayeeDataSource from '../datasources/payee-datasource';
 
 
 const router = express.Router();
 const accountService = new AccountService(new AccountDataSource());
 const transactionService = new TransactionService(new TransactionDataSource());
-const transactionController = new TransactionController(transactionService , accountService);
+const payeeService = new PayeeService(new PayeeDataSource())
+const transactionController = new TransactionController(transactionService , accountService  , payeeService);
 
 const createTransactionRoute = () => {
 
@@ -26,6 +29,11 @@ const createTransactionRoute = () => {
 
   router.post("/make-transfer", validator(ValidationSchema.makeInternalTransferSchema), Auth(), (req: Request, res: Response) => {
     return transactionController.internalTransfer(req, res);
+  });
+
+
+  router.post("/make-withdrawal-by-paystack", validator(ValidationSchema.makeWithdrawalByPaystack), Auth(), (req: Request, res: Response) => {
+    return transactionController.withdrawByPaystack(req, res);
   });
 
 

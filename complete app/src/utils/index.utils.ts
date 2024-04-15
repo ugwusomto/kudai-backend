@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { createLogger , format , info, transport, transports } from 'winston';
+import { BANKS } from '../interfaces/enum/payee-enum';
 
 const printRed = (text: string) => {
   console.log('\x1b[31m%s\x1b[0m', `${text} \n`);
@@ -61,6 +62,15 @@ const parseToObject = (value: string): any => {
 }
 
 
+const getBankName = (bankCode:string): string =>{
+  const filter = BANKS.filter(item => (item.code == bankCode));
+  if(filter.length > 0){
+    return filter[0].name;
+  }
+  return '';
+}
+
+
 const Utility = {
   printRed,
   handleError,
@@ -68,7 +78,8 @@ const Utility = {
   generateCode,
   isEmpty,
   escapeHtml,
-  parseToObject
+  parseToObject,
+  getBankName
 };
 
 export default Utility;

@@ -6,6 +6,11 @@ export interface IPaystackPaymentObject {
   reference: string;
 }
 
+export interface IPaystackInitTransferObject {
+  transferCode:string;
+  reference: string;
+}
+
 export interface ITransactionDetail {
   gateway?: string;
   recieverAccountNumber?:string

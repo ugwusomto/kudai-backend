@@ -7,3 +7,6 @@
 2024-04-14 17:01:46 error : Insufficient balance to complete this transfer 
 2024-04-14 17:02:53 error : Invalid receiver account 
 2024-04-14 17:05:09 error : Amount must be above zero 
+2024-04-14 18:12:50 error : Insufficient balance to complete this transfer 
+2024-04-14 18:12:58 error : Paystack transfer failed 
+2024-04-14 18:13:41 error : Paystack transfer failed 

@@ -56,6 +56,19 @@ class TransactionService {
     } as ITransactionCreationBody;
     return this.transactionDataSource.create(record,options)
   }
+
+  async processExternalTransfer(data:Partial<ITransaction> , options: Partial<IFindTransactionQuery> = {}):Promise<ITransaction> {
+    const record  = {
+      ...data,
+      type: TransactionTypes.TRANSFER,
+      detail: {
+        ...data.detail,
+      },
+      status: TransactionStatus.IN_PROGRESS
+    } as ITransactionCreationBody;
+    return this.transactionDataSource.create(record,options)
+  }
+
 }
 
 export default TransactionService;
