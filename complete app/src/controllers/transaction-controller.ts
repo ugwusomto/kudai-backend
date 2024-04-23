@@ -9,13 +9,16 @@ import sequelize from "../database";
 import { IAccount } from "../interfaces/account-interface";
 import { ITransaction } from "../interfaces/transaction-interface";
 import PayeeService from "../services/payee-service";
+import { autoInjectable } from "tsyringe";
 
+
+@autoInjectable()
 class TransactionController {
   private transactionService: TransactionService;
   private accountService: AccountService;
   private payeeService: PayeeService;
 
-  constructor(_transactionService: TransactionService, _accountService: AccountService ,  _payeeService: PayeeService) {
+  constructor(_transactionService: TransactionService, _accountService: AccountService , _payeeService: PayeeService) {
     this.transactionService = _transactionService;
     this.accountService = _accountService;
     this.payeeService = _payeeService;
@@ -239,6 +242,33 @@ class TransactionController {
   }
 
 
+  async getAllUserTransactions(req: Request, res: Response) {
+    try {
+      const params = { ...req.body };
+      let filter = {} as ITransaction;
+      filter.userId = params.user.id;
+      if(params.accountId){
+        filter.accountId = params.accountId
+      }
+      let transactions = await this.transactionService.getTransactionsByField(filter)
+      return Utility.handleSuccess(res, "Transactions fetched successfully", { transactions }, ResponseCode.SUCCESS);
+    } catch (error) {
+      return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
+  async getUserTransaction(req: Request, res: Response) {
+    try {
+      const params = { ...req.params };
+      let transaction = await this.transactionService.getTransactionByField({ id:Utility.escapeHtml(params.id) });
+      if (!transaction) {
+        return Utility.handleError(res, "Transaction does not exist", ResponseCode.NOT_FOUND);
+      }
+      return Utility.handleSuccess(res, "Transaction fetched successfully", { transaction }, ResponseCode.SUCCESS);
+    } catch (error) {
+      return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
 
 
 

@@ -1,9 +1,12 @@
+import { autoInjectable } from 'tsyringe';
 import { IFindUserQuery, IUser, IUserCreationBody, IUserDataSource } from '../interfaces/user-interface';
+import UserDataSource from '../datasources/user-datasource';
 
+@autoInjectable()
 class UserService {
-  private userDataSource: IUserDataSource;
+  private userDataSource: UserDataSource;
 
-  constructor(_userDataSource: IUserDataSource) {
+  constructor(_userDataSource: UserDataSource) {
     this.userDataSource = _userDataSource;
   }
 

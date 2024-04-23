@@ -1,11 +1,15 @@
+import { autoInjectable } from "tsyringe";
 import { TransactionGateWay, TransactionStatus, TransactionTypes } from "../interfaces/enum/transaction-enum";
 import { IFindTransactionQuery, ITransaction, ITransactionCreationBody, ITransactionDataSource } from "../interfaces/transaction-interface";
 import { v4 as uuidv4 } from "uuid";
+import TransactionDataSource from "../datasources/transaction-datasource";
 
+
+@autoInjectable()
 class TransactionService {
-  private transactionDataSource: ITransactionDataSource;
+  private transactionDataSource: TransactionDataSource;
 
-  constructor(_transactionDataSource: ITransactionDataSource) {
+  constructor(_transactionDataSource: TransactionDataSource) {
     this.transactionDataSource = _transactionDataSource;
   }
 
@@ -68,6 +72,18 @@ class TransactionService {
     } as ITransactionCreationBody;
     return this.transactionDataSource.create(record,options)
   }
+
+
+  async getTransactionsByField(record:Partial<ITransaction>) : Promise<ITransaction[]>{
+    const query = {where:{...record} , raw: true};
+    return this.transactionDataSource.fetchAll(query)
+  }
+
+  async getTransactionByField(record:Partial<ITransaction>) : Promise<ITransaction | null>{
+    const query = {where:{...record} , raw: true} as IFindTransactionQuery;
+    return this.transactionDataSource.fetchOne(query)
+  }
+
 
 }
 

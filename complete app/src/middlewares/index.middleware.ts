@@ -3,8 +3,11 @@ import jwt from 'jsonwebtoken';
 import { Schema } from 'yup';
 import Utility from '../utils/index.utils';
 import { ResponseCode } from '../interfaces/enum/code-enum';
-import {userService} from "../router/user-router"
+import UserService from '../services/user-service';
 import { IUser } from '../interfaces/user-interface';
+import { container } from 'tsyringe';
+
+const userService = container.resolve(UserService);
 
 export const validator = (schema: Schema<any>) => {
   return async (req: Request, res: Response, next: NextFunction) => {

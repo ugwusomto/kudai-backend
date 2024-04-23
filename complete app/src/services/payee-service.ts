@@ -1,10 +1,13 @@
 import { where } from "sequelize";
 import { IFindPayeeQuery, IPayee, IPayeeCreationBody, IPayeeDataSource } from "../interfaces/payee-interface";
+import { autoInjectable } from "tsyringe";
+import PayeeDataSource from "../datasources/payee-datasource";
 
+@autoInjectable()
 class PayeeService {
-  private payeeDataSource: IPayeeDataSource;
+  private payeeDataSource: PayeeDataSource;
 
-  constructor(_payeeDataSource: IPayeeDataSource) {
+  constructor(_payeeDataSource: PayeeDataSource) {
     this.payeeDataSource = _payeeDataSource;
   }
 
@@ -21,6 +24,16 @@ class PayeeService {
       }
     } as IPayeeCreationBody
     return  await this.payeeDataSource.create(record)
+  }
+
+  async getPayeeByField(record : Partial<IPayee>):Promise<IPayee | null>{
+    const query = {where :{...record} , raw : true} as IFindPayeeQuery;
+    return this.payeeDataSource.fetchOne(query)
+  }
+
+  async getPayeesByUserId(userId:string):Promise<IPayee[]>{
+    const query = {where :{ userId } , raw : true} as IFindPayeeQuery;
+    return this.payeeDataSource.fetchAll(query)
   }
 
 }

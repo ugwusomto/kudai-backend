@@ -1,16 +1,12 @@
 import express, { Request, Response } from 'express';
 import UserController from '../controllers/user-controller';
-import UserService from '../services/user-service';
 import { validator } from '../middlewares/index.middleware';
 import ValidationSchema from '../validators/user-validator-schema';
-import UserDataSource from '../datasources/user-datasource';
-import TokenService from '../services/token-service';
-import TokenDataSource from '../datasources/token-datasource';
+import { container } from 'tsyringe';
 
 const router = express.Router();
-const tokenService = new TokenService(new TokenDataSource());
-export const userService = new UserService(new UserDataSource());
-const userController = new UserController(userService , tokenService);
+
+const userController =  container.resolve(UserController);
 
 const createUserRoute = () => {
 

@@ -10,7 +10,9 @@ import TokenService from "../services/token-service";
 import { IToken } from "../interfaces/token-interface";
 import EmailService from "../services/email-service"
 import moment from "moment";
+import { autoInjectable } from "tsyringe";
 
+@autoInjectable()
 class UserController {
   private userService: UserService;
   private tokenService: TokenService;

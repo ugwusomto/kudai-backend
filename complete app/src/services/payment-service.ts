@@ -92,16 +92,16 @@ class PaymentService {
   }
 
 
-  public static async initiatePaystackTransfer(recipient: string,amount: number,  message: string): Promise<IPaystackInitTransferObject | null> {
+  public static async initiatePaystackTransfer(recipient: string, amount: number, message: string): Promise<IPaystackInitTransferObject | null> {
     try {
 
       const params = {
-         source:"balance",
-         reason:message,
-         amount:amount*100,
-         recipient,
-         reference:this.generatePaystackReference(),
-         currency:"NGN",
+        source: "balance",
+        reason: message,
+        amount: amount * 100,
+        recipient,
+        reference: this.generatePaystackReference(),
+        currency: "NGN",
       }
 
       const record = await axios.post("https://api.paystack.co/transfer", params, {
@@ -111,11 +111,11 @@ class PaymentService {
         },
       });
 
-      const {data} = record
+      const { data } = record
       if (data && data.status) {
         return {
-          reference:params.reference,
-          transferCode:data.data.tranfer_code
+          reference: params.reference,
+          transferCode: data.data.tranfer_code
         }
       }
       return null;

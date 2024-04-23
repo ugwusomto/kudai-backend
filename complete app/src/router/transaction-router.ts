@@ -2,19 +2,13 @@ import express, { Request, Response } from 'express';
 import { Auth, validator } from '../middlewares/index.middleware';
 import ValidationSchema from '../validators/transaction-validator-schema';
 import TransactionController from '../controllers/transaction-controller';
-import TransactionService from '../services/transaction-service';
-import TransactionDataSource from '../datasources/transaction-datasource';
-import AccountDataSource from '../datasources/account-datasource';
-import AccountService from '../services/account-service';
-import PayeeService from '../services/payee-service';
-import PayeeDataSource from '../datasources/payee-datasource';
+
+import { container } from 'tsyringe';
 
 
 const router = express.Router();
-const accountService = new AccountService(new AccountDataSource());
-const transactionService = new TransactionService(new TransactionDataSource());
-const payeeService = new PayeeService(new PayeeDataSource())
-const transactionController = new TransactionController(transactionService , accountService  , payeeService);
+
+const transactionController = container.resolve(TransactionController)
 
 const createTransactionRoute = () => {
 
@@ -36,8 +30,13 @@ const createTransactionRoute = () => {
     return transactionController.withdrawByPaystack(req, res);
   });
 
+  router.get("/list", Auth(), (req: Request, res: Response) => {
+    return transactionController.getAllUserTransactions(req, res);
+  });
 
-
+  router.get("/:id", Auth(), (req: Request, res: Response) => {
+    return transactionController.getUserTransaction(req, res);
+  });
 
   return router;
 };
