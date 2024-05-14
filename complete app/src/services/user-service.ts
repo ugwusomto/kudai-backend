@@ -15,6 +15,11 @@ class UserService {
     return this.userDataSource.fetchOne(query);
   }
 
+  async getAllUsers(): Promise<IUser[] | null> {
+    const query = { where: {}, order: [['createdAt', 'DESC']], raw: true,  } as IFindUserQuery;
+    return this.userDataSource.fetchAll(query);
+  }
+
   async createUser(record: IUserCreationBody) {
     return this.userDataSource.create(record);
   }

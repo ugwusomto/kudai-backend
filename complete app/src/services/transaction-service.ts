@@ -84,6 +84,10 @@ class TransactionService {
     return this.transactionDataSource.fetchOne(query)
   }
 
+  async getTransactionSum(field:keyof ITransaction,record: Partial<ITransaction>): Promise<number> {
+    const query = { where: { ...record }, raw: true } as IFindTransactionQuery;
+    return this.transactionDataSource.fetchSum(field,query);
+  }
 
 }
 

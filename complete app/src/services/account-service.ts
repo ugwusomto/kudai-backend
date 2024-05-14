@@ -34,6 +34,11 @@ class AccountService {
     return accountNo;
   }
 
+  async getAccounts(): Promise<IAccount[]> {
+    const query = { where: {}, raw: true };
+    return this.accountDataSource.fetchAll(query);
+  }
+
   async createAccount(data: Partial<IAccountCreationBody>) {
     const record = {
       ...data,

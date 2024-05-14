@@ -18,6 +18,7 @@ export interface IFindUserQuery {
   where: {
     [key: string]: string;
   };
+  order?:any
   raw?: boolean;
   returning: boolean;
 }

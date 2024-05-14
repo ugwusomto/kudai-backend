@@ -34,6 +34,14 @@ const createAccountRoute = () => {
     return accountController.getUserPayee(req, res);
   });
 
+  router.post("/apply-for-loan", validator(ValidationSchema.loanApplication), Auth(), (req: Request, res: Response) => {
+    return accountController.applyLoan(req, res);
+  });
+
+  router.get("/loan/list", Auth(), (req: Request, res: Response) => {
+    return accountController.getAllUserLoan(req, res);
+  });
+
   return router;
 };
 

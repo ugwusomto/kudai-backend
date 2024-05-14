@@ -10,7 +10,7 @@ import { IAccount } from "../interfaces/account-interface";
 import { ITransaction } from "../interfaces/transaction-interface";
 import PayeeService from "../services/payee-service";
 import { autoInjectable } from "tsyringe";
-
+import Permissions from "../permission";
 
 @autoInjectable()
 class TransactionController {
@@ -269,6 +269,22 @@ class TransactionController {
       return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
     }
   }
+
+  async getAllUserTransactionsAdmin(req: Request, res: Response) {
+    try {
+      const admin = {...req.body.user}
+      const permission = Permissions.can(admin.role).readAny('transactions');
+      if (!permission) {
+        return Utility.handleError(res, 'Invalid Permission', ResponseCode.NOT_FOUND);
+      }
+      let filter = {} as ITransaction;
+      let transactions = await this.transactionService.getTransactionsByField({ ...filter });
+      return Utility.handleSuccess(res, "Transaction fetched successfully", { transactions }, ResponseCode.SUCCESS);
+    } catch (error) {
+      return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+    }
+  }
+
 
 
 

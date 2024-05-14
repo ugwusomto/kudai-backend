@@ -11,6 +11,11 @@ class UserDataSource implements IUserDataSource {
     return await UserModel.findOne(query);
   }
 
+  async fetchAll(query: IFindUserQuery): Promise<IUser[] | null> {
+    return await UserModel.findAll(query);
+  }
+
+
   async   updateOne(searchBy:IFindUserQuery , data:Partial<IUser>):Promise<void>{
      await UserModel.update(data , searchBy);
   }

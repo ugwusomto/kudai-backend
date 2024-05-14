@@ -10,3 +10,7 @@
 2024-04-14 18:12:50 error : Insufficient balance to complete this transfer 
 2024-04-14 18:12:58 error : Paystack transfer failed 
 2024-04-14 18:13:41 error : Paystack transfer failed 
+2024-05-07 04:05:29 error : status must be one of the following values: ACTIVE, INACTIVE, SUSPENDED, FROZEN 
+2024-05-07 04:14:50 error : Invalid Permission 
+2024-05-14 05:25:29 error : Account frozen 
+2024-05-14 05:28:19 error : You already have a loan pending on this account 
